@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+		
+    <context:component-scan base-package="com.nuc.service.impl"/>
+    <dubbo:application name="server-customer"></dubbo:application>
+	<dubbo:registry protocol="zookeeper" address="127.0.0.1:2181"/>  
+	<dubbo:consumer check="false"></dubbo:consumer>
+	<dubbo:monitor address="127.0.0.1:7070"></dubbo:monitor>
+	
+	
+	<!--  设置存根指定全类名 -->
+	<dubbo:reference interface="com.nuc.service.UserService" id="userService" 
+		stub="com.nuc.service.impl.UserServiceStub"/>
+	
+	
+	
+	
+</beans>
